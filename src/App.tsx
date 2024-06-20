@@ -1,20 +1,11 @@
-import { useEffect } from 'react';
 import './App.css';
-import ConvertDateToTimestamp from './services/ConvertDateToTimestamp';
+import DisplayCountdown from './components/DisplayCountdown'
 
 function App() {
 
-  useEffect(() => {
-    console.log(ConvertDateToTimestamp("2024-11-20"));
-    console.log(new Date().getTime());
-  },[]);
-
-
   return (
     <>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+      <DisplayCountdown />
     </>
   )
 }
