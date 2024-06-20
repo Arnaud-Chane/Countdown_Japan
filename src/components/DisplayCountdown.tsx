@@ -1,41 +1,38 @@
 import { useState, useEffect } from 'react';
-import ConvertDateToTimestamp from '../services/ConvertDateToTimestamp';
-import { useTime } from 'react-timer-hook';
 
 function DisplayCountdown() {
+  const [countdown, setCountdown] = useState('');
 
-  // const {
-  //   seconds,
-  //   minutes,
-  //   hours,
-  //   ampm,
-  // } = useTime({ format: '12-hour'});
+  useEffect(() => {
+    const targetDate = new Date('2024-11-20').getTime();
+    const timerId = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
 
-  function timerUpdate() {        
-    var currentTime = new Date();
-    var h = currentTime.getHours();
-    var m = currentTime.getMinutes();
-    var s = currentTime.getSeconds();
+      if (distance < 0) {
+        clearInterval(timerId);
+        setCountdown('Countdown ended');
+        return;
+      }
 
-    setTimeout(timerUpdate,1000);
-    return `${h}-${m}-${s}`
-    //Update the hour, minute and second in UI
-}
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-useEffect(()=>{
+      setCountdown(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+    }, 1000);
 
-},[new Date().getTime()])
-
-  const [countdown, setCountdown] = useState(timerUpdate());
+    return () => clearInterval(timerId); // cleanup on component unmount
+  }, []);
 
   return (
     <div>
-      <h1>react-timer-hook </h1>
-      <p>Current Time Demo</p>
-      <div style={{fontSize: '100px'}}>
+      <div style={{ fontSize: '100px' }}>
         <span>{countdown}</span>
       </div>
-    </div>  )
+    </div>
+  );
 }
 
-export default DisplayCountdown
+export default DisplayCountdown;
