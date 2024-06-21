@@ -1,11 +1,11 @@
 import './App.css';
-import DisplayCountdown from './components/DisplayCountdown'
+import Layout from './layouts/Layout';
 
 function App() {
 
   return (
     <>
-      <DisplayCountdown />
+      <Layout />
     </>
   )
 }
