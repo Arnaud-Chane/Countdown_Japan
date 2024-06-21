@@ -1,37 +1,34 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function DisplayCountdown() {
+
   const [countdown, setCountdown] = useState('');
 
   useEffect(() => {
-    const targetDate = new Date('2024-11-20').getTime();
-    const timerId = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+    const departureDate = new Date('2024-11-20').getTime();
+    const timer = setInterval(() => {
+      const today = new Date().getTime();
+      const remaining = departureDate - today;
 
-      if (distance < 0) {
-        clearInterval(timerId);
-        setCountdown('Countdown ended');
-        return;
+      if(remaining < 0) {
+        clearInterval(timer);
+        setCountdown("It's time to go !");
+	return;
       }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
 
       setCountdown(`${days}d ${hours}h ${minutes}m ${seconds}s`);
     }, 1000);
-
-    return () => clearInterval(timerId); // cleanup on component unmount
   }, []);
 
   return (
-    <div>
-      <div style={{ fontSize: '100px' }}>
-        <span>{countdown}</span>
-      </div>
-    </div>
+    <>
+      <div>{countdown}</div> 
+    </>
   );
 }
 
