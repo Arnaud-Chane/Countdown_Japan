@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 function DisplayCountdown() {
 
   const [countdown, setCountdown] = useState('');
+  const [departureDate, setDepartureDate] = useState(new Date('2024-11-20').getTime());
 
   useEffect(() => {
-    const departureDate = new Date('2024-11-20').getTime();
     const timer = setInterval(() => {
       const today = new Date().getTime();
       const remaining = departureDate - today;
@@ -16,12 +16,26 @@ function DisplayCountdown() {
 	return;
       }
 
-      const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+      const seconds = Math.floor(remaining / 1000);
 
-      setCountdown(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+      const minutes = Math.floor(seconds / 60);
+
+      const hours = Math.floor(minutes / 60);
+
+      const days = Math.floor(hours / 24);
+
+      const months = Math.floor(days / 30);
+
+
+      days %= 30;
+
+      hours %= 24;
+
+      minutes %= 60;
+
+      seconds %= 60;
+   
+      setCountdown(`${months}m ${days}d ${hours}h ${minutes}m ${seconds}s`);
     }, 1000);
   }, []);
 
