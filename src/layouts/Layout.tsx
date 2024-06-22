@@ -9,7 +9,11 @@ function Layout() {
 
   return (
     <>
-<div className="flex flex-col items-center h-screen justify-center">
+<div className="flex flex-col items-center h-screen justify-between">
+  <div className="header">
+    
+  </div>
+  <div className="content mt-0 mn-auto">
   <div>
     Coming home soon, Japan ...
   </div>
@@ -18,12 +22,15 @@ function Layout() {
     <img src={Home} className="w-10 h-10" />
   </div>
   <DisplayCountdown />
+  </div>
+  <div className="footer mb-8">
   <div className="flex items-center mt-4">
     <img src={Github} className="w-6 h-6 mr-2" />
     <div>
       Chou & Dou
     </div>
     <img src={Us} className="w-6 h-6 ml-2" />
+  </div>
   </div>
 </div>
     </>
