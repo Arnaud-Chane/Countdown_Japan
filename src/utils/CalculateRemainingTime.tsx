@@ -1,3 +1,9 @@
+const oneMinute = (1000 * 60);
+const oneHour = oneMinute * 60;
+const oneDay = oneHour * 24;
+const avgDaysInYear = 365;
+const monthLengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
 function CalculateRemainingTime(): string {
 
   //
@@ -8,30 +14,16 @@ function CalculateRemainingTime(): string {
   //
   //
 
-  const oneMinute = (1000 * 60);
-  const oneHour = oneMinute * 60;
-  const oneDay = oneHour * 24;
-  const avgDaysInYear = 365;
-  const monthLengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
   let finalString: string[] = [];
-
-  const today = new Date().getTime();
-  const remaining = departureDate - today;
+  const remaining = departureDate - Date.now();
 
   if (remaining < 0) {
     return "It's time to go !";
   }
 
   const days = Math.floor(remaining / oneDay);
-
   const years = Math.floor(days / avgDaysInYear);
-  let leapYears = 0;
-  for (let i = 0; i <= years; i++) {
-    if ((i % 4 === 0 && i % 100 !== 0) || i % 400 === 0) {
-      leapYears++;
-    }
-  }
+  let leapYears = Math.floor(years / 4) - Math.floor(years / 100) + Math.floor(years / 400);
 
   let remainingDays = days - (years * avgDaysInYear);
 
