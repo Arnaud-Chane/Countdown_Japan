@@ -14,6 +14,8 @@ function CalculateRemainingTime(): string {
   const avgDaysInYear = 365;
   const monthLengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
+  let finalString: string[] = [];
+
   const today = new Date().getTime();
   const remaining = departureDate - today;
 
@@ -50,7 +52,14 @@ function CalculateRemainingTime(): string {
   const minutes = Math.floor((remaining % oneHour) / oneMinute);
   const seconds = Math.floor((remaining % oneMinute) / 1000);
 
-  return `${years}y ${months}m ${remainingDays}d ${hours}h ${minutes}min ${seconds}s`;
+  years && finalString.push(`${years}y`);
+  months && finalString.push(`${months}m`);
+  remainingDays && finalString.push(`${remainingDays}d`);
+  hours && finalString.push(`${hours}h`);
+  minutes && finalString.push(`${minutes}min`);
+  seconds && finalString.push(`${seconds}s`);
+
+  return finalString.join(" ");
 }
 
 export default CalculateRemainingTime;
