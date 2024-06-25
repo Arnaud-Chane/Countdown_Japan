@@ -25,11 +25,11 @@ function Layout() {
         </div>
         <footer className="footer mb-8">
           <div className="flex items-center justify-between mt-4">
-            <img src={Github} className="h-10 mx-10" />
+            <img src={Github} className="h-10" />
             <div className="mx-12">
               Chou & Dou
             </div>
-            <img src={Us} className="h-24 mx-10" />
+            <img src={Us} className="h-24" />
           </div>
         </footer>
       </div>
