@@ -18,7 +18,7 @@ function Layout() {
             Coming home soon, Japan ...
           </div>
           <div className="flex self-start mb-20 mt-10">
-            <img src={Flight} className="mr-6" />
+            <img src={Flight} className="mr-6 animate-flight" />
             <img src={Home} className="h-20" />
           </div>
           <DisplayCountdown />
