@@ -1,11 +1,11 @@
-const oneMinute = (1000 * 60);
-const oneHour = oneMinute * 60;
-const oneDay = oneHour * 24;
+const oneMinute = 60 * 1000;
+const oneHour = 60 * oneMinute;
+const oneDay = 24 * oneHour;
 const avgDaysInYear = 365;
 const monthLengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 function CalculateRemainingTime(): string {
-
+  
   //
   //  If you want to change the departure date :
   //
@@ -21,76 +21,29 @@ function CalculateRemainingTime(): string {
     return "It's time to go !";
   }
 
-  const days = Math.floor(remaining / oneDay);
-  const years = Math.floor(days / avgDaysInYear);
-  let leapYears = Math.floor(years / 4) - Math.floor(years / 100) + Math.floor(years / 400);
+  const timeUnits = [
+    { unit: 'Year', value: Math.floor(remaining / (oneDay * avgDaysInYear)) },
+    { unit: 'Month', value: 0 },
+    { unit: 'Day', value: Math.floor((remaining % (oneDay * avgDaysInYear)) / oneDay) },
+    { unit: 'Hour', value: Math.floor((remaining % oneDay) / oneHour) },
+    { unit: 'Minute', value: Math.floor((remaining % oneHour) / oneMinute) },
+    { unit: 'Second', value: Math.floor((remaining % oneMinute) / 1000) },
+  ];
 
-  let remainingDays = days - (years * avgDaysInYear);
-
-  let months = 0;
+  let remainingDays = timeUnits[2].value;
   let currentMonth = 0;
   while (remainingDays > monthLengths[currentMonth]) {
     remainingDays -= monthLengths[currentMonth];
     currentMonth++;
-    months++;
-
-    if (currentMonth === 1 && leapYears > 0) {
-      remainingDays--;
-      leapYears--;
-    }
+    timeUnits[1].value++;
   }
+  timeUnits[2].value = remainingDays;
 
-  const hours = Math.floor((remaining % oneDay) / oneHour);
-  const minutes = Math.floor((remaining % oneHour) / oneMinute);
-  const seconds = Math.floor((remaining % oneMinute) / 1000);
-
-  if (years) {
-    if (years > 1) {
-      finalString.push(`${years} Years`);
-    } else if (years == 1) {
-      finalString.push(`${years} Year`)
+  timeUnits.forEach(({ unit, value }) => {
+    if (value > 0) {
+      finalString.push(`${value} ${unit}${value > 1 ? 's' : ''}`);
     }
-  }
-
-  if (months) {
-    if (months > 1) {
-      finalString.push(`${months} Months`);
-    } else if (months == 1) {
-      finalString.push(`${months} Month`)
-    }
-  }
-
-  if (remainingDays) {
-    if (remainingDays > 1) {
-      finalString.push(`${remainingDays} Days`);
-    } else if (remainingDays == 1) {
-      finalString.push(`${remainingDays} Day`)
-    }
-  }
-
-  if (hours) {
-    if (hours > 1) {
-      finalString.push(`${hours} Hours`);
-    } else if (hours == 1) {
-      finalString.push(`${hours} Hour`)
-    }
-  }
-
-  if (minutes) {
-    if (minutes > 1) {
-      finalString.push(`${minutes} Minutes`);
-    } else if (minutes == 1) {
-      finalString.push(`${minutes} Minute`)
-    }
-  }
-
-  if (seconds) {
-    if (seconds > 1) {
-      finalString.push(`${seconds} Seconds`);
-    } else if (seconds == 1) {
-      finalString.push(`${seconds} Second`)
-    }
-  }
+  });
 
   return finalString.join(" ");
 }
