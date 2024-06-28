@@ -17,7 +17,7 @@ function Layout() {
           <div className="italic font-thin">
             Coming home soon, Japan ...
           </div>
-          <div className="flex justify-center mb-10 mt-10">
+          <div className="flex justify-center mb-20 mt-10">
             <img src={Flight} className="mr-6 animate-flight h-48" />
             <img src={Home} className="h-20" />
           </div>
