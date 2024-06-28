@@ -44,12 +44,53 @@ function CalculateRemainingTime(): string {
   const minutes = Math.floor((remaining % oneHour) / oneMinute);
   const seconds = Math.floor((remaining % oneMinute) / 1000);
 
-  years && finalString.push(`${years} Year`);
-  months && finalString.push(`${months} Month`);
-  remainingDays && finalString.push(`${remainingDays} Day`);
-  hours && finalString.push(`${hours} Hour`);
-  minutes && finalString.push(`${minutes} Minute`);
-  seconds && finalString.push(`${seconds} Second`);
+  if (years) {
+    if (years > 1) {
+      finalString.push(`${years} Years`);
+    } else if (years == 1) {
+      finalString.push(`${years} Year`)
+    }
+  }
+
+  if (months) {
+    if (months > 1) {
+      finalString.push(`${months} Months`);
+    } else if (months == 1) {
+      finalString.push(`${months} Month`)
+    }
+  }
+
+  if (remainingDays) {
+    if (remainingDays > 1) {
+      finalString.push(`${remainingDays} Days`);
+    } else if (remainingDays == 1) {
+      finalString.push(`${remainingDays} Day`)
+    }
+  }
+
+  if (hours) {
+    if (hours > 1) {
+      finalString.push(`${hours} Hours`);
+    } else if (hours == 1) {
+      finalString.push(`${hours} Hour`)
+    }
+  }
+
+  if (minutes) {
+    if (minutes > 1) {
+      finalString.push(`${minutes} Minutes`);
+    } else if (minutes == 1) {
+      finalString.push(`${minutes} Minute`)
+    }
+  }
+
+  if (seconds) {
+    if (seconds > 1) {
+      finalString.push(`${seconds} Seconds`);
+    } else if (seconds == 1) {
+      finalString.push(`${seconds} Second`)
+    }
+  }
 
   return finalString.join(" ");
 }
