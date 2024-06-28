@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
 import CalculateRemainingTime from '../utils/CalculateRemainingTime'
 
-function DisplayCountdown() {
-  const [countdown, setCountdown] = useState('');
-  const [units, setUnits] = useState([]);
-  const [numbs, setNumbs] = useState([]);
+const DisplayCountdown: React.FC = () => {
+  const [countdown, setCountdown] = useState<string>('');
+  const [units, setUnits] = useState<string[]>([]);
+  const [numbs, setNumbs] = useState<string[]>([]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      const newCountdown = CalculateRemainingTime();
+      const remainingTime = CalculateRemainingTime();
 
-      if (newCountdown !== "It's time to go !") {
-        const splitTimer = newCountdown.split(' ');
-        const newRows = splitTimer.reduce((result, key, index) => {
-          return (index % 2 === 0 ? result.push([key]) : result[result.length - 1].push(key)) && result;
+      if (remainingTime !== "It's time to go !") {
+        const splitTimer = remainingTime.split(' ');
+        const newRows = splitTimer.reduce((result: string[][], key, index) => {
+          if (index % 2 === 0) {
+            result.push([key]);
+          } else {
+            result[result.length - 1].push(key);
+          }
+          return result;
         }, []);
         const newUnits = newRows.map(row => row[1]);
         setUnits(newUnits);
@@ -22,7 +27,7 @@ function DisplayCountdown() {
         setNumbs(newNumbers);
 
       } else {
-        setCountdown(CalculateRemainingTime())
+        setCountdown(remainingTime)
       }
     }, 1000);
 
@@ -31,18 +36,21 @@ function DisplayCountdown() {
 
   return (
     <>
-      {countdown == "It's time to go !" ?
-        <div>{countdown}</div> :
+      {countdown === "It's time to go !" ?
+        <div className="italic font-thin">
+          {countdown}
+        </div> :
+
         <div className="flex gap-2">
           <div className="flex-col text-right">
-            {numbs.map(numb => (
-              <div className="numb">{numb}</div>
+            {numbs.map((numb, index) => (
+              <div key={index} className="numb">{numb}</div>
             ))}
           </div>
 
           <div className="flex-col">
-            {units.map(unit => (
-              <div className="unit">{unit}</div>
+            {units.map((unit, index) => (
+              <div key={index} className="unit">{unit}</div>
             ))}
           </div>
         </div>
