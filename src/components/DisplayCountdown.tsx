@@ -41,7 +41,7 @@ const DisplayCountdown: React.FC = () => {
           {countdown}
         </div> :
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 font-bold">
           <div className="flex-col text-right">
             {numbs.map((numb, index) => (
               <div key={index} className="numb">{numb}</div>
