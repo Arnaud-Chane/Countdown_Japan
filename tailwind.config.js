@@ -11,11 +11,11 @@ export default {
       },
       keyframes: {
         flight: {
-          '0%': { transform: 'translateY(0) translateX(5px)' },
+          '0%': { transform: 'translateY(0)' },
           '25%': { transform: 'translateY(-10px)' },
-          '50%': { transform: 'translateY(20px) translateX(-5px)' },
-          '75%': { transform: 'translateY(-20px)' },
-          '100%': { transform: 'translateY(0) translateX(5px)' },
+          '50%': { transform: 'translateY(15px)' },
+          '75%': { transform: 'translateY(-15px)' },
+          '100%': { transform: 'translateY(0)' },
         }
       }
     },

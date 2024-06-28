@@ -6,7 +6,7 @@ function DisplayCountdown() {
   const [countdown, setCountdown] = useState(CalculateRemainingTime());
 
   useEffect(() => {
-    if(countdown ==  "It's time to go !"){
+    if (countdown == "It's time to go !") {
       return;
     }
     const intervalId = setInterval(() => {
@@ -18,8 +18,7 @@ function DisplayCountdown() {
 
   return (
     <>
-      <div>{countdown}</div>
-    </>
+      <div className='text-4xl italic bold'>{countdown}</div>    </>
   );
 }
 

@@ -44,12 +44,12 @@ function CalculateRemainingTime(): string {
   const minutes = Math.floor((remaining % oneHour) / oneMinute);
   const seconds = Math.floor((remaining % oneMinute) / 1000);
 
-  years && finalString.push(`${years}y`);
-  months && finalString.push(`${months}m`);
-  remainingDays && finalString.push(`${remainingDays}d`);
-  hours && finalString.push(`${hours}h`);
-  minutes && finalString.push(`${minutes}min`);
-  seconds && finalString.push(`${seconds}s`);
+  years && finalString.push(`${years} Year`);
+  months && finalString.push(`${months} Month`);
+  remainingDays && finalString.push(`${remainingDays} Day`);
+  hours && finalString.push(`${hours} Hour`);
+  minutes && finalString.push(`${minutes} Minute`);
+  seconds && finalString.push(`${seconds} Second`);
 
   return finalString.join(" ");
 }

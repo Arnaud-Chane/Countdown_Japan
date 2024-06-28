@@ -14,11 +14,11 @@ function Layout() {
 
         </header>
         <div className="content flex flex-col items-center justify-center mt-0 mb-auto">
-          <div>
+          <div className="italic font-thin">
             Coming home soon, Japan ...
           </div>
-          <div className="flex self-start mb-20 mt-10">
-            <img src={Flight} className="mr-6 animate-flight" />
+          <div className="flex self-start mb-10 mt-10">
+            <img src={Flight} className="mr-6 animate-flight h-48" />
             <img src={Home} className="h-20" />
           </div>
           <DisplayCountdown />
