@@ -1,3 +1,13 @@
+# URL :
+https://choudou-next-journey-to-japan.netlify.app/
+
+# Figma
+https://www.figma.com/design/9Ee3dlBgtB18WfTM992jq6/RedTellMeWhen?node-id=0-1&t=U1LhYIvlSUOPtWS8-0
+
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
